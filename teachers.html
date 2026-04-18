@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teachers & Staff – Saint Paul English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue-dark: #0A2E6E;
+    --blue-mid: #1A56B0;
+    --blue-accent: #2E80D8;
+    --blue-light: #EAF2FB;
+    --blue-pale: #F4F8FE;
+    --gold: #E6A817;
+    --white: #ffffff;
+    --text: #0A2E6E;
+    --muted: #4A6FA5;
+    --border: #C8DDF5;
+  }
+  body { font-family: 'Nunito', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+  nav {
+    background: var(--white); border-bottom: 2px solid var(--blue-light);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 68px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(10,46,110,0.07);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; border: 2px solid var(--gold); background: var(--blue-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .nav-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .nav-title { color: var(--blue-dark); font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .nav-sub { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: var(--blue-mid); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+  .page-hero { background: var(--blue-dark); padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(46,128,216,0.3) 0%, transparent 70%); }
+  .page-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; position: relative; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,2.8rem); color: var(--white); font-weight: 700; position: relative; }
+  .page-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; margin-top: 0.75rem; position: relative; }
+  .hero-divider { width: 60px; height: 3px; background: var(--gold); margin: 1rem auto 0; border-radius: 2px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem,3vw,2rem); font-weight: 700; color: var(--blue-dark); margin-bottom: 1rem; }
+
+  /* PRINCIPAL CARD */
+  .principal-card {
+    background: var(--blue-dark); border-radius: 16px; padding: 2.5rem;
+    display: flex; gap: 2rem; align-items: center; margin-bottom: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .principal-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 50%, rgba(46,128,216,0.25) 0%, transparent 60%); }
+  .principal-avatar {
+    width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1);
+    border: 4px solid var(--gold); display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .principal-info { position: relative; z-index: 1; }
+  .principal-role { font-size: 11px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.3rem; }
+  .principal-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--white); font-weight: 700; margin-bottom: 0.25rem; }
+  .principal-qual { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 1rem; }
+  .principal-msg { font-size: 14px; color: rgba(255,255,255,0.8); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1rem; line-height: 1.7; }
+
+  /* DEPARTMENT TABS */
+  .dept-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .dept-tab { padding: 8px 20px; border: 2px solid var(--border); border-radius: 30px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; background: var(--white); }
+  .dept-tab:hover, .dept-tab.active { background: var(--blue-dark); color: var(--white); border-color: var(--blue-dark); }
+
+  /* TEACHER GRID */
+  .teachers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+  .teacher-card {
+    background: var(--blue-pale); border: 2px solid var(--border);
+    border-radius: 12px; padding: 1.75rem 1.25rem; text-align: center;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .teacher-card:hover { border-color: var(--blue-accent); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(10,46,110,0.1); }
+  .teacher-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--blue-dark); border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 1rem;
+  }
+  .teacher-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--blue-dark); margin-bottom: 2px; }
+  .teacher-subject { font-size: 12px; color: var(--blue-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .teacher-qual { font-size: 12px; color: var(--muted); margin-bottom: 0.75rem; }
+  .teacher-exp { display: inline-block; background: var(--blue-dark); color: var(--white); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 20px; }
+
+  /* STATS STRIP */
+  .staff-stats { background: var(--blue-pale); border: 1.5px solid var(--border); border-radius: 12px; display: grid; grid-template-columns: repeat(4,1fr); margin: 4rem 0 0; }
+  .staff-stat { padding: 1.5rem; text-align: center; border-right: 1px solid var(--border); }
+  .staff-stat:last-child { border-right: none; }
+  .staff-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--blue-dark); }
+  .staff-stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  footer { background: #061a40; padding: 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  footer strong { color: var(--gold); }
+
+  @media (max-width: 700px) {
+    .teachers-grid { grid-template-columns: 1fr 1fr; }
+    .principal-card { flex-direction: column; text-align: center; }
+    .staff-stats { grid-template-columns: 1fr 1fr; }
+    .staff-stat:nth-child(2) { border-right: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  const LOGO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230A2E6E'/%3E%3Ctext x='50' y='58' text-anchor='middle' font-size='28' font-family='serif' fill='%23E6A817' font-weight='bold'%3ESP%3C/text%3E%3C/svg%3E";
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.school-logo').forEach(function(img) { img.src = LOGO; });
+
+    // Tab filter
+    const tabs = document.querySelectorAll('.dept-tab');
+    const cards = document.querySelectorAll('.teacher-card');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const dept = this.dataset.dept;
+        cards.forEach(card => {
+          card.style.display = (dept === 'all' || card.dataset.dept === dept) ? '' : 'none';
+        });
+      });
+    });
+  });
+</script>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo"><img class="school-logo" src="" alt="Logo"></div>
+    <div>
+      <div class="nav-title">Saint Paul English School</div>
+      <div class="nav-sub">Kawasoti-17, Gochhada</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="admission.html">Admission</a></li>
+    <li><a href="teachers.html" class="active">Teachers</a></li>
+    <li><a href="noticeboard.html">Notice Board</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">Our Team</div>
+  <h1>Teachers & Staff</h1>
+  <p>Dedicated educators shaping the leaders of tomorrow</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="main">
+
+  <!-- PRINCIPAL -->
+  <div class="section-tag">School Leadership</div>
+  <h2 class="section-title" style="margin-bottom:1.5rem;">Principal's Message</h2>
+  <div class="principal-card">
+    <div class="principal-avatar">👨‍💼</div>
+    <div class="principal-info">
+      <div class="principal-role">Principal</div>
+      <div class="principal-name">Mr. Ramesh Kumar Sharma</div>
+      <div class="principal-qual">M.Ed. in English Education | 20+ Years Experience</div>
+      <div class="principal-msg">"At Saint Paul English School, we believe every child deserves a nurturing environment where curiosity is celebrated, character is built, and excellence is pursued. Our dedicated team works tirelessly to inspire each student to Arise and Shine."</div>
+    </div>
+  </div>
+
+  <!-- TEACHERS -->
+  <div class="section-tag">Meet the Team</div>
+  <h2 class="section-title">Our Faculty</h2>
+
+  <div class="dept-tabs" style="margin-top:1rem;">
+    <div class="dept-tab active" data-dept="all">All Staff</div>
+    <div class="dept-tab" data-dept="primary">Primary</div>
+    <div class="dept-tab" data-dept="secondary">Secondary</div>
+    <div class="dept-tab" data-dept="science">Science</div>
+    <div class="dept-tab" data-dept="arts">Arts & Sports</div>
+    <div class="dept-tab" data-dept="admin">Administration</div>
+  </div>
+
+  <div class="teachers-grid">
+    <div class="teacher-card" data-dept="secondary">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div class="teacher-name">Ms. Sunita Thapa</div>
+      <div class="teacher-subject">English</div>
+      <div class="teacher-qual">M.A. English | B.Ed.</div>
+      <span class="teacher-exp">12 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="secondary">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div class="teacher-name">Mr. Bikash Adhikari</div>
+      <div class="teacher-subject">Mathematics</div>
+      <div class="teacher-qual">B.Sc. Math | B.Ed.</div>
+      <span class="teacher-exp">8 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="science">
+      <div class="teacher-avatar">👩‍🔬</div>
+      <div class="teacher-name">Ms. Puja Karmacharya</div>
+      <div class="teacher-subject">Science</div>
+      <div class="teacher-qual">B.Sc. Biology | B.Ed.</div>
+      <span class="teacher-exp">6 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="secondary">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div class="teacher-name">Mr. Dinesh Gautam</div>
+      <div class="teacher-subject">Social Studies & Nepali</div>
+      <div class="teacher-qual">B.A. History | B.Ed.</div>
+      <span class="teacher-exp">10 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="science">
+      <div class="teacher-avatar">👨‍🔬</div>
+      <div class="teacher-name">Mr. Sanjay Pokhrel</div>
+      <div class="teacher-subject">Physics & Chemistry</div>
+      <div class="teacher-qual">B.Sc. Physics | B.Ed.</div>
+      <span class="teacher-exp">5 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="primary">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div class="teacher-name">Ms. Asha Rijal</div>
+      <div class="teacher-subject">Class Teacher – Grade 4</div>
+      <div class="teacher-qual">B.Ed. Primary Education</div>
+      <span class="teacher-exp">7 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="primary">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div class="teacher-name">Ms. Kamala Bhandari</div>
+      <div class="teacher-subject">Class Teacher – Grade 1</div>
+      <div class="teacher-qual">B.Ed. Early Childhood</div>
+      <span class="teacher-exp">9 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="primary">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div class="teacher-name">Ms. Rita Shrestha</div>
+      <div class="teacher-subject">Nursery & LKG</div>
+      <div class="teacher-qual">Diploma in ECE</div>
+      <span class="teacher-exp">4 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="arts">
+      <div class="teacher-avatar">🎨</div>
+      <div class="teacher-name">Mr. Nabin Karki</div>
+      <div class="teacher-subject">Arts & Music</div>
+      <div class="teacher-qual">B.A. Fine Arts</div>
+      <span class="teacher-exp">6 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="arts">
+      <div class="teacher-avatar">⚽</div>
+      <div class="teacher-name">Mr. Suresh Magar</div>
+      <div class="teacher-subject">Physical Education</div>
+      <div class="teacher-qual">B.P.Ed. Sports Science</div>
+      <span class="teacher-exp">8 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="admin">
+      <div class="teacher-avatar">📋</div>
+      <div class="teacher-name">Ms. Gita Pandey</div>
+      <div class="teacher-subject">Administrator</div>
+      <div class="teacher-qual">BBS Finance</div>
+      <span class="teacher-exp">11 Yrs Experience</span>
+    </div>
+    <div class="teacher-card" data-dept="admin">
+      <div class="teacher-avatar">📚</div>
+      <div class="teacher-name">Mr. Prakash Sapkota</div>
+      <div class="teacher-subject">Librarian</div>
+      <div class="teacher-qual">B.L.I.S. Library Science</div>
+      <span class="teacher-exp">5 Yrs Experience</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="staff-stats">
+    <div class="staff-stat">
+      <div class="staff-stat-num">40+</div>
+      <div class="staff-stat-label">Total Staff</div>
+    </div>
+    <div class="staff-stat">
+      <div class="staff-stat-num">32</div>
+      <div class="staff-stat-label">Teaching Faculty</div>
+    </div>
+    <div class="staff-stat">
+      <div class="staff-stat-num">95%</div>
+      <div class="staff-stat-label">Degree Holders</div>
+    </div>
+    <div class="staff-stat">
+      <div class="staff-stat-num">8+</div>
+      <div class="staff-stat-label">Avg. Years Exp.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; 2025 <strong>Saint Paul English School</strong> · Kawasoti-17, Gochhada, Nawalparasi, Nepal</p>
+</footer>
+</body>
+</html>

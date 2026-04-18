@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saint Paul English School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue-dark: #0A2E6E;
+    --blue-mid: #1A56B0;
+    --blue-accent: #2E80D8;
+    --blue-light: #EAF2FB;
+    --blue-pale: #F4F8FE;
+    --gold: #E6A817;
+    --white: #ffffff;
+    --text: #0A2E6E;
+    --muted: #4A6FA5;
+    --border: #C8DDF5;
+  }
+  body { font-family: 'Nunito', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--blue-light);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(10,46,110,0.07);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo {
+    width: 46px; height: 46px; border-radius: 50%;
+    overflow: hidden; border: 2px solid var(--gold);
+    background: var(--blue-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nav-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .nav-title { color: var(--blue-dark); font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .nav-sub { font-size: 11px; color: var(--muted); font-family: 'Nunito', sans-serif; font-weight: 400; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--blue-mid); text-decoration: none; font-size: 14px; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue-accent); }
+
+  /* HERO */
+  .hero {
+    background: var(--white);
+    padding: 5rem 2rem 4rem; text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(46,128,216,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    width: 110px; height: 110px; border-radius: 50%;
+    overflow: hidden; border: 4px solid var(--gold);
+    background: var(--blue-dark);
+    margin: 0 auto 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(10,46,110,0.18);
+  }
+  .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--blue-light); border: 1px solid var(--border);
+    color: var(--blue-mid); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 20px; border-radius: 20px; margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--blue-dark); font-weight: 700; line-height: 1.15; margin-bottom: 0.4rem;
+  }
+  .hero-location { font-size: 1rem; color: var(--muted); margin-bottom: 1.2rem; font-weight: 400; }
+  .hero-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 1.2rem; border-radius: 2px; }
+  .hero-motto { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--blue-accent); margin-bottom: 0.5rem; }
+  .hero-motto-label { font-size: 11px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2rem; }
+  .hero-grade-tag {
+    display: inline-block; background: var(--blue-dark); color: var(--white);
+    font-size: 13px; font-weight: 600; padding: 8px 24px; border-radius: 4px;
+    margin-bottom: 2rem; letter-spacing: 0.04em;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue-dark); color: var(--white); padding: 12px 30px;
+    border: none; border-radius: 6px; font-size: 14px; font-weight: 700;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: background 0.2s; letter-spacing: 0.04em; font-family: 'Nunito', sans-serif;
+  }
+  .btn-primary:hover { background: var(--blue-mid); }
+  .btn-outline {
+    background: var(--white); color: var(--blue-dark); padding: 12px 30px;
+    border: 2px solid var(--blue-dark); border-radius: 6px; font-size: 14px;
+    font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.2s; letter-spacing: 0.04em; font-family: 'Nunito', sans-serif;
+  }
+  .btn-outline:hover { background: var(--blue-light); }
+
+  /* STATS */
+  .stats-bar { background: var(--blue-dark); display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .stat-item { padding: 1.5rem 1rem; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue-dark); margin-bottom: 1rem; }
+  .section-lead { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .about-img-block {
+    background: var(--blue-dark); border-radius: 12px; height: 340px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-img-block::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(46,128,216,0.4) 0%, transparent 60%);
+  }
+  .about-logo-large {
+    width: 130px; height: 130px; border-radius: 50%; overflow: hidden;
+    border: 5px solid var(--gold); background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .about-logo-large img { width: 100%; height: 100%; object-fit: contain; }
+  .about-quote {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.1); border-left: 3px solid var(--gold);
+    padding: 0.75rem 1rem; color: rgba(255,255,255,0.9);
+    font-size: 13px; font-style: italic;
+    border-radius: 0 6px 6px 0;
+  }
+  .about-list { list-style: none; margin-top: 1.5rem; }
+  .about-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+  .about-list li::before { content: ''; width: 8px; height: 8px; background: var(--blue-accent); border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+
+  /* GRADE BANDS */
+  .grades-full { background: var(--blue-pale); padding: 4rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .grades-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .grades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
+  .grade-card {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: 10px; padding: 1.5rem 1rem; text-align: center; transition: all 0.2s;
+  }
+  .grade-card:hover { border-color: var(--blue-accent); transform: translateY(-3px); }
+  .grade-icon {
+    width: 52px; height: 52px; background: var(--blue-light); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem; font-size: 22px;
+    font-weight: 700; color: var(--blue-dark); font-family: 'Playfair Display', serif;
+  }
+  .grade-card h3 { font-size: 1rem; font-weight: 700; color: var(--blue-dark); margin-bottom: 0.3rem; }
+  .grade-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .grade-badge {
+    display: inline-block; background: var(--blue-dark); color: var(--white);
+    font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+
+  /* PROGRAMS */
+  .programs-full { background: var(--white); padding: 4rem 0; }
+  .programs-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+  .program-card {
+    background: var(--blue-pale); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 1.5rem; transition: all 0.2s;
+  }
+  .program-card:hover { border-color: var(--blue-accent); background: var(--blue-light); }
+  .program-icon {
+    width: 46px; height: 46px; background: var(--blue-dark);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+  }
+  .program-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .program-card h3 { font-size: 1rem; color: var(--blue-dark); font-weight: 700; margin-bottom: 0.4rem; }
+  .program-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* NEWS */
+  .news-full { background: var(--blue-pale); padding: 4rem 0; border-top: 1px solid var(--border); }
+  .news-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+  .news-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; transition: all 0.2s; }
+  .news-card:hover { border-color: var(--blue-accent); }
+  .news-img { height: 130px; background: var(--blue-dark); display: flex; align-items: center; justify-content: center; }
+  .news-body { padding: 1.25rem; }
+  .news-date { font-size: 11px; color: var(--blue-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .news-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--blue-dark); font-weight: 700; margin: 5px 0 8px; }
+  .news-excerpt { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* CONTACT */
+  .contact-full { background: var(--blue-dark); padding: 4rem 0; }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); font-weight: 700; margin-bottom: 1rem; }
+  .contact-desc { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 2rem; line-height: 1.7; }
+  .contact-detail { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1.25rem; }
+  .contact-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-detail-label { color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+  .contact-detail-value { color: var(--white); font-size: 14px; }
+  .contact-form { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 1.75rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-label { display: block; font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 6px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .form-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: var(--white); font-family: 'Nunito', sans-serif; font-size: 14px; outline: none; }
+  .form-input:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 80px; }
+
+  footer { background: #061a40; padding: 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+  footer p { color: rgba(255,255,255,0.4); font-size: 12px; }
+  footer strong { color: var(--gold); }
+
+  @media (max-width: 700px) {
+    .about-grid, .contact-inner { grid-template-columns: 1fr; }
+    .programs-grid, .news-grid, .grades-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  const LOGO = "data:image/png;base64,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";
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.school-logo').forEach(function(img) {
+      img.src = LOGO;
+    });
+  });
+</script>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo">
+      <img class="school-logo" src="" alt="Saint Paul School Logo">
+    </div>
+    <div>
+      <div class="nav-title">Saint Paul English School</div>
+      <div class="nav-sub">Kawasoti-17, Gochhada</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#grades">Classes</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">
+    <img class="school-logo" src="" alt="Saint Paul School Logo">
+  </div>
+  <div class="hero-badge">Nursery to Grade 10</div>
+  <h1>Saint Paul English School</h1>
+  <div class="hero-location">Kawasoti-17, Gochhada, Nawalparasi</div>
+  <div class="hero-divider"></div>
+  <div class="hero-motto">" Arise and Shine "</div>
+  <div class="hero-motto-label">Our Guiding Motto</div>
+  <div class="hero-grade-tag">Nursery · LKG · UKG · Grade 1 to Grade 10</div>
+  <div class="hero-actions">
+    <a href="#grades" class="btn-primary">Explore Classes</a>
+    <a href="#contact" class="btn-outline">Enquire Now</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Students</div></div>
+  <div class="stat-item"><div class="stat-num">13</div><div class="stat-label">Grade Levels</div></div>
+  <div class="stat-item"><div class="stat-num">40+</div><div class="stat-label">Qualified Teachers</div></div>
+  <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Years of Excellence</div></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-block">
+      <div class="about-logo-large">
+        <img class="school-logo" src="" alt="Saint Paul School Logo">
+      </div>
+      <div class="about-quote">"Every child has the potential to arise and shine — we are here to help them discover it."</div>
+    </div>
+    <div>
+      <div class="section-tag">About Our School</div>
+      <h2 class="section-title">Nurturing Minds, Shaping Futures</h2>
+      <p class="section-lead">Saint Paul English School is a trusted institution in Kawasoti-17, Gochhada, providing quality English-medium education from Nursery through Grade 10 — preparing students for a bright and successful future.</p>
+      <ul class="about-list">
+        <li>English-medium instruction from Nursery to Grade 10</li>
+        <li>Experienced, caring, and dedicated faculty</li>
+        <li>Holistic development: academics, arts, sports & values</li>
+        <li>Safe, inclusive, and child-friendly environment</li>
+        <li>Active parent-teacher collaboration and community ties</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GRADE LEVELS -->
+<div class="grades-full" id="grades">
+  <div class="grades-inner">
+    <div class="section-tag">Academic Structure</div>
+    <h2 class="section-title">Classes We Offer</h2>
+    <p class="section-lead">From a child's very first steps in learning to their final school exams — we guide every student with care and excellence.</p>
+    <div class="grades-grid">
+      <div class="grade-card">
+        <div class="grade-badge">Early Years</div>
+        <div class="grade-icon">🌱</div>
+        <h3>Nursery</h3>
+        <p>Playful introduction to learning through activities, rhymes, and exploration.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-badge">Early Years</div>
+        <div class="grade-icon">🌼</div>
+        <h3>LKG & UKG</h3>
+        <p>Building foundational literacy, numeracy and social skills in a nurturing setting.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-badge">Primary</div>
+        <div class="grade-icon">📚</div>
+        <h3>Grade 1 – 5</h3>
+        <p>Core subjects with English, Maths, Science and Social Studies taught engagingly.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-badge">Lower Secondary</div>
+        <div class="grade-icon">🔬</div>
+        <h3>Grade 6 – 8</h3>
+        <p>Deeper academics with introduction to critical thinking and subject specialization.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-badge">Secondary</div>
+        <div class="grade-icon">🎓</div>
+        <h3>Grade 9 – 10</h3>
+        <p>SEE preparation with strong focus on Board-level examinations and career readiness.</p>
+      </div>
+      <div class="grade-card">
+        <div class="grade-badge">All Levels</div>
+        <div class="grade-icon">⭐</div>
+        <h3>Co-Curricular</h3>
+        <p>Sports, arts, clubs and leadership programs for all students across every grade.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<div class="programs-full" id="programs">
+  <div class="programs-inner">
+    <div class="section-tag">What We Teach</div>
+    <h2 class="section-title">Our Programs & Subjects</h2>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+        <h3>English Language & Literacy</h3>
+        <p>Spoken and written English from Nursery onward — building confident communicators at every grade level.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></div>
+        <h3>Mathematics</h3>
+        <p>From counting and shapes in early years to algebra and geometry in secondary — strong numeracy throughout.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+        <h3>Science</h3>
+        <p>Hands-on and inquiry-based science — covering environment, biology, physics and chemistry for higher grades.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h3>Social Studies & Nepali</h3>
+        <p>Understanding Nepal's history, geography, culture and civic values alongside Nepali language education.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg></div>
+        <h3>Arts, Music & Creativity</h3>
+        <p>Encouraging imagination and self-expression through drawing, craft, music and creative activities at all levels.</p>
+      </div>
+      <div class="program-card">
+        <div class="program-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <h3>SEE Board Preparation</h3>
+        <p>Dedicated coaching and model exams for Grade 9 & 10 students to excel in the Secondary Education Examination.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="news-full" id="news">
+  <div class="news-inner">
+    <div class="section-tag">Latest Updates</div>
+    <h2 class="section-title">News & Announcements</h2>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E6A817" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
+        <div class="news-body">
+          <div class="news-date">Admissions Open</div>
+          <div class="news-title">New Academic Year Enrollment 2025</div>
+          <div class="news-excerpt">Admissions are open for Nursery to Grade 10. Enroll your child today and give them the best start in life.</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E6A817" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138"/></svg></div>
+        <div class="news-body">
+          <div class="news-date">Achievement</div>
+          <div class="news-title">Outstanding SEE Results 2024</div>
+          <div class="news-excerpt">Our Grade 10 students achieved excellent results in the SEE Board Examinations, making the school proud.</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E6A817" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        <div class="news-body">
+          <div class="news-date">Upcoming Event</div>
+          <div class="news-title">Annual Sports Day & Prize Ceremony</div>
+          <div class="news-excerpt">Join us for our Annual Sports Day and Prize Distribution — celebrating students' hard work across all grades.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-full" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-tag" style="color:rgba(230,168,23,0.9);">Contact Us</div>
+      <div class="contact-title">We'd Love to Hear from You</div>
+      <div class="contact-desc">Whether you're a parent enquiring about admissions or a community member — our doors and hearts are always open.</div>
+      <div class="contact-detail">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <div><div class="contact-detail-label">Address</div><div class="contact-detail-value">Kawasoti-17, Gochhada, Nawalparasi, Nepal</div></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+        <div><div class="contact-detail-label">Email</div><div class="contact-detail-value">Saintpaulenglishschool@gmail.com</div></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+        <div><div class="contact-detail-label">Phone</div><div class="contact-detail-value">+977-9805442443</div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Full name"></div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+      <div class="form-group"><label class="form-label">Enquiry About</label><input type="text" class="form-input" placeholder="e.g. Admission for Grade 3"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-input form-textarea" placeholder="How can we help you?"></textarea></div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem;background:var(--gold);color:#0A2E6E;" onclick="alert('Thank you! We will get back to you shortly.')">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 <strong>Saint Paul English School</strong> · Kawasoti-17, Gochhada, Nawalparasi · <strong>Arise and Shine</strong></p>
+</footer>
+
+</body>
+</html>
